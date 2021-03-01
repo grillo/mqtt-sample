@@ -38,6 +38,12 @@ Build the project using the check mark on the bottom toolbar, then upload using 
 ## Consume data
 One method for quickly consuming data is to use mosquitto subscribe and publish commands. Once Mosquitto is installed you can run these commands using the IP address of your MQTT broker:
 
+## Start device
+Plug in your sensor to power.
+
+### Send local Wifi details
+Use the Grillo+ [Android](https://play.google.com/store/apps/details?id=com.grilloplus.iot_esptouch_demo&hl=en_US&gl=US) or [iOS](https://play.google.com/store/apps/details?id=com.grilloplus.iot_esptouch_demo&hl=en&gl=US) apps to transmit your 2.4Ghz wifi (not 5Ghz) to your sensor device.
+
 ### Subscribe to traces
 In a terminal subscribe to all traces:
 `mosquitto_sub -t "iot-2/evt/+/fmt/json" -h 192.168.0.4 -p 1883 -i "a:5yrusp:mosquitto"`
@@ -50,4 +56,3 @@ In a separate terminal start the trace sending, setting the Live Data Duration i
 You can change the sample rate of the device as follows:
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:125}`
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:31}`
-
