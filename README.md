@@ -58,6 +58,7 @@ In a separate terminal start the trace sending, setting the Live Data Duration i
 You can change the sample rate of the device as follows:
 
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:125}`
+
 or
 
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:31}`
