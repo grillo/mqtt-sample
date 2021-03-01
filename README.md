@@ -1,13 +1,9 @@
 # MQTT Sample Firmware
 
-This is based on the OpenEEW Watson IOT firmware, but simplified to allow custom backend solutions and non-authenticated MQTT brokers.
+This is based on the [OpenEEW Watson IOT firmware](https://github.com/openeew/openeew-sensor/tree/master/firmware/WatsonIoT), but simplified to allow custom backend solutions and non-authenticated MQTT brokers.
 
 ## Operation
-In the program setup we check that the accelerometer is present, calibrate it and set the ODR, LPF and RANGE. The device reads the flash memory for saved networks and scans to see if they match any available. If there's a match, connect.
-
-For the loop, the device checks if still connected to WiFi, if not, retry connection. When a PPS signal is present, it interrupts the system, gets the timestamp and starts a micros timer.When the interrupt coming from the ADXL is present, meaning that FIFO is full, the system takes the timestamp, and attaches the micro seconds that passed since the PPS started, giving time accuracy. Then the device reads the FIFO values, puts them into a JSON message and sends them to the udpDestination and udpPort specified in the config file. Multiple FIFOS can be concatenated in a message, number of fifos in a message can be specified in the config file.
-
-For tracking purposes the traces have a consecutive id, this is not intended for a production firmware, their purpose is to count how many traces are sent and received.
+The sensor will 
 
 ### Instructions
 
@@ -23,7 +19,7 @@ This example requires installation of the MQTT broker on any hardware (cloud, se
 ### Setup
 ### Install PlatformIO
 
-Follow this guide to [install PlatformIO](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation) on your machine. PlaformIO offers several benefits to the Arduino IDE, particularly the ability to contain dependencies within a simple folder structure.
+Follow this guide to [install PlatformIO and VSCode](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation) on your machine. PlaformIO offers several benefits to the Arduino IDE, particularly the ability to contain dependencies within a simple folder structure.
 
 ### Open project
 Inside VSCode go to PlaformIO home, which is available on the bottom toolbar, and select `Projects`, then `Open Project`. Navigate to the root folder where you cloned this repository and open.
@@ -38,4 +34,20 @@ In the main.cpp file change the ip address to match that of your [MQTT broker](h
 
 ### Upload to an OpenEEW sensor
 Build the project using the check mark on the bottom toolbar, then upload using the arrow button adjacent to it. The IDE should automatically detect the board of your connnected OpenEEW sensor and start to write the new firmware.
+
+## Consume data
+One method for quickly consuming data is to use mosquitto subscribe and publish commands. Once Mosquitto is installed you can run these commands using the IP address of your MQTT broker:
+
+### Subscribe to traces
+In a terminal subscribe to all traces:
+`mosquitto_sub -t "iot-2/evt/+/fmt/json" -h 192.168.0.4 -p 1883 -i "a:5yrusp:mosquitto"`
+
+### Start publishing
+In a separate terminal start the trace sending, setting the Live Data Duration in seconds:
+`mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/sendacceldata/fmt/json -m {LiveDataDuration:5}`
+
+### Change sample rate
+You can change the sample rate of the device as follows:
+`mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:125}`
+`mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:31}`
 
