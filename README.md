@@ -16,6 +16,9 @@ This example requires installation of the MQTT broker on any hardware (cloud, se
 ## Flash a new device
 
 ### Setup
+
+As your device will be connected to a unique endpoint, you must make a small change to its firmware so it knows where to connect to.
+
 #### Install PlatformIO
 
 Follow this guide to [install PlatformIO and VSCode](https://docs.platformio.org/en/latest/integration/ide/vscode.html#installation) on your machine. PlaformIO offers several benefits to the Arduino IDE, particularly the ability to contain dependencies within a simple folder structure.
