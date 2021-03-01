@@ -3,7 +3,7 @@
 This is based on the [OpenEEW Watson IOT firmware](https://github.com/openeew/openeew-sensor/tree/master/firmware/WatsonIoT), but simplified to allow custom backend solutions and non-authenticated MQTT brokers.
 
 ## Operation
-The sensor will 
+The sensor will connect to an MQTT endpoint of your choosing, which you will be able to subscribe to and ingest data.
 
 ### Instructions
 
