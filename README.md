@@ -46,13 +46,18 @@ Use the Grillo+ [Android](https://play.google.com/store/apps/details?id=com.gril
 
 ### Subscribe to traces
 In a terminal subscribe to all traces:
+
 `mosquitto_sub -t "iot-2/evt/+/fmt/json" -h 192.168.0.4 -p 1883 -i "a:5yrusp:mosquitto"`
 
 ### Start publishing
 In a separate terminal start the trace sending, setting the Live Data Duration in seconds:
+
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/sendacceldata/fmt/json -m {LiveDataDuration:5}`
 
 ### Change sample rate
 You can change the sample rate of the device as follows:
+
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:125}`
+or
+
 `mosquitto_pub -h 192.168.0.4 -t iot-2/cmd/samplerate/fmt/json -m {SampleRate:31}`
