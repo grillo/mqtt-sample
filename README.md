@@ -9,7 +9,6 @@ The sensor will connect to an MQTT endpoint of your choosing, which you will be 
 This example requires installation of the MQTT broker on any hardware (cloud, server, laptop, rasperry pi, etc), and then configuration of the device's firmware.
 - Create an [MQTT broker](https://mosquitto.org/download/) and keep the ip address and port for later.
 - Install [VSCode](https://code.visualstudio.com/) and [PlatformIO for ESP32](https://platformio.org/).
-- Create a [Watson IoT Platform](https://cloud.ibm.com/catalog/services/internet-of-things-platform) service instance
 - Clone this repo and change the ip address to match your [MQTT broker](https://github.com/grillo/mqtt-sample/blob/4f73d4496a628dea1c99baa3dfe0725fe8c42c01/src/main.cpp#L18)
 - Start your device and consume data using node-red, python, nodejs or any other MQTT client.
 
